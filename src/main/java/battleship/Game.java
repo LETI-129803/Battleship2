@@ -39,6 +39,7 @@ public class Game implements IGame
 			printBoardShots(moves, map);
 
 		printBoardFrame(map);
+		System.out.println(BoardRenderer.renderBoard(map));
 
 		if (showLegend) {
 			System.out.println("          LEGENDA");
