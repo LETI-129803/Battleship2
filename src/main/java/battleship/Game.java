@@ -162,7 +162,7 @@ public class Game implements IGame
 
 	private final IFleet alienFleet;
 	private final List<IMove> myMoves;
-
+	private final GameHistory gameHistory = new GameHistory();
 	private Integer countInvalidShots;
 	private Integer countRepeatedShots;
 	private Integer countHits;
@@ -172,7 +172,7 @@ public class Game implements IGame
 	//------------------------------------------------------------------
 	public Game(IFleet myFleet)
 	{
-		this.moveNumber = 1;
+		this.moveNumber = gameHistory.getNextMoveNumber();
 
 		this.alienMoves = new ArrayList<IMove>();
 		this.myMoves = new ArrayList<IMove>();
@@ -348,11 +348,48 @@ public class Game implements IGame
 
 		Move move = new Move(moveNumber, shots, shotResults);
 
-//		System.out.println(move);
-
 		move.processEnemyFire(true);
 
 		alienMoves.add(move);
+
+// Preparar os resultados de cada tiro para o histórico JSON
+		List<Map<String, Object>> historyShots = new ArrayList<>();
+
+		for (int i = 0; i < shots.size(); i++) {
+
+			IPosition position = shots.get(i);
+			ShotResult result = shotResults.get(i);
+
+			Map<String, Object> shotInfo = new LinkedHashMap<>();
+
+			shotInfo.put("row", String.valueOf(position.getClassicRow()));
+			shotInfo.put("column", position.getClassicColumn());
+
+			String outcome;
+
+			if (!result.valid()) {
+				outcome = "OUTSIDE";
+			} else if (result.repeated()) {
+				outcome = "REPEATED";
+			} else if (result.ship() == null) {
+				outcome = "MISS";
+			} else if (result.sunk()) {
+				outcome = "SUNK";
+			} else {
+				outcome = "HIT";
+			}
+
+			shotInfo.put("result", outcome);
+
+			if (result.ship() != null) {
+				shotInfo.put("shipType", result.ship().getCategory());
+			}
+
+			historyShots.add(shotInfo);
+		}
+
+// Guardar a jogada em JSON
+		gameHistory.addMove(moveNumber, historyShots);
 
 		moveNumber++;
 	}
