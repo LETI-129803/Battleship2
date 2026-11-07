@@ -552,4 +552,7 @@ public class Game implements IGame
 		int l58 = 58;
 		System.out.println("Teste Long Method: " + (l01 + l58));
 	}
+	public void MetodoNomeErradoComMaiuscula() {
+		System.out.println("Violação de Checkstyle!");
+	}
 }
