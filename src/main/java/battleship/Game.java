@@ -490,4 +490,11 @@ public class Game implements IGame
 			System.out.println("| Maldito sejas, Java Sparrow, eu voltarei, glub glub glub ... |");
 			System.out.println("+--------------------------------------------------------------+");
 	}
+	// Método de 60 linhas para provocar deliberadamente o smell Long Method
+	public void metodoComSessentaLinhasParaFalharQodana() {
+		System.out.println("Teste Long Method: " );
+	}
+	public void metodoNomeCorretoComMinuscula() {
+		System.out.println("corrigido!");
+	}
 }
