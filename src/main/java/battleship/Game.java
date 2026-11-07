@@ -492,67 +492,9 @@ public class Game implements IGame
 	}
 	// Método de 60 linhas para provocar deliberadamente o smell Long Method
 	public void metodoComSessentaLinhasParaFalharQodana() {
-		int l01 = 1;
-		int l02 = 2;
-		int l03 = 3;
-		int l04 = 4;
-		int l05 = 5;
-		int l06 = 6;
-		int l07 = 7;
-		int l08 = 8;
-		int l09 = 9;
-		int l10 = 10;
-		int l11 = 11;
-		int l12 = 12;
-		int l13 = 13;
-		int l14 = 14;
-		int l15 = 15;
-		int l16 = 16;
-		int l17 = 17;
-		int l18 = 18;
-		int l19 = 19;
-		int l20 = 20;
-		int l21 = 21;
-		int l22 = 22;
-		int l23 = 23;
-		int l24 = 24;
-		int l25 = 25;
-		int l26 = 26;
-		int l27 = 27;
-		int l28 = 28;
-		int l29 = 29;
-		int l30 = 30;
-		int l31 = 31;
-		int l32 = 32;
-		int l33 = 33;
-		int l34 = 34;
-		int l35 = 35;
-		int l36 = 36;
-		int l37 = 37;
-		int l38 = 38;
-		int l39 = 39;
-		int l40 = 40;
-		int l41 = 41;
-		int l42 = 42;
-		int l43 = 43;
-		int l44 = 44;
-		int l45 = 45;
-		int l46 = 46;
-		int l47 = 47;
-		int l48 = 48;
-		int l49 = 49;
-		int l50 = 50;
-		int l51 = 51;
-		int l52 = 52;
-		int l53 = 53;
-		int l54 = 54;
-		int l55 = 55;
-		int l56 = 56;
-		int l57 = 57;
-		int l58 = 58;
-		System.out.println("Teste Long Method: " + (l01 + l58));
+		System.out.println("Teste Long Method: " );
 	}
-	public void MetodoNomeErradoComMaiuscula() {
-		System.out.println("Violação de Checkstyle!");
+	public void metodoNomeCorretoComMinuscula() {
+		System.out.println("corrigido!");
 	}
 }
