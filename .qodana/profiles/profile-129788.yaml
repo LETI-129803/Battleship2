@@ -1,0 +1,7 @@
+# 129788
+base: empty
+inspections:
+  - inspection: MethodWithTooManyLines
+    enabled: true
+    options:
+      m_limit: 30
