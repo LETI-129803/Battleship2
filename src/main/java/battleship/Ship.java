@@ -161,8 +161,8 @@ public abstract class Ship implements IShip
 		{
 			List<IPosition> adjacents = position.adjacentPositions();
 			for (IPosition adj : adjacents)
-		if (!getPositions().contains(adj) && !adjacentPositions.contains(adj))
-				adjacentPositions.add(adj);
+				if (!getPositions().contains(adj) && !adjacentPositions.contains(adj))
+					adjacentPositions.add(adj);
 		}
 		return adjacentPositions;
 	}
