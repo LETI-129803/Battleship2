@@ -4,8 +4,6 @@ profile:
   name: empty
 include:
   - name: MethodWithTooManyLines
-    parameters:
-      m_limit: 30
 failureConditions:
   severityThresholds:
     any: 0
