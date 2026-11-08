@@ -29,7 +29,7 @@ jobs:
         uses: JetBrains/qodana-action@v2026.2
         with:
 
-          args: --config qodana-129803.yaml --profile-path .qodana/profiles/profile-129803.yaml --disable-sanity
+          args: --config qodana-129803.yaml --disable-sanity
           pr-mode: false
           use-annotations: true
           post-pr-comment: true

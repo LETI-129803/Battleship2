@@ -8,7 +8,14 @@ linter: qodana-jvm-community
 projectJDK: "21"
 
 profile:
-  path: .qodana/profiles/profile-129803.yaml
+  base:
+    name: empty
+  inspections:
+    - inspection: ParametersPerMethod
+      enabled: true
+      severity: WARNING
+      options:
+        m_limit: 5
 
 failureConditions:
   severityThresholds:
