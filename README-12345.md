@@ -68,7 +68,7 @@ O relatório do Qodana apresentou:
 
 - 183 problemas detetados no total;
 - 2 ocorrências da inspeção `Suspicious indentation after control statement without braces`.
-  ![Qodana Before](images/qodanabefore.png)
+
 ### Segunda execução
 
 Após a correção do código, através da utilização de chavetas e do ajuste da indentação, foi executada novamente a análise.
@@ -77,7 +77,7 @@ O relatório apresentou:
 
 - 10 problemas detetados no total;
 - 0 ocorrências da inspeção selecionada.
-  ![Qodana After](images/qodanaAfter.png)
+
 ### Resultado
 
 A comparação dos dois relatórios demonstra que a inspeção identificou corretamente o problema introduzido e deixou de o reportar após a sua correção.
