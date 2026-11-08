@@ -77,7 +77,7 @@ public abstract class Ship implements IShip
 	/**
 	 * The Category.
 	 */
-	private String Categoria;
+	private String category;
 
 	/**
 	 * The Bearing.
@@ -109,11 +109,11 @@ public abstract class Ship implements IShip
 	 */
 	public Ship(String category, Compass bearing, IPosition pos, int size)
     {
-		this.Categoria = Objects.requireNonNull(category, "Ship's category must not be null");
+		this.category = Objects.requireNonNull(category, "Ship's category must not be null");
 		this.bearing = Objects.requireNonNull(bearing, "Ship's bearing must not be null");
 		this.pos = Objects.requireNonNull(pos, "Ship's position must not be null");
 	
-		this.Categoria = category;
+		this.category = category;
 		this.bearing = bearing;
 		this.pos = pos;
 		this.size = size;
@@ -134,7 +134,7 @@ public abstract class Ship implements IShip
     @Override
     public String getCategory()
     {
-	return Categoria;
+	return category;
     }
 
 	/**
@@ -435,7 +435,7 @@ public abstract class Ship implements IShip
 	@Override
     public String toString()
     {
-	return "[" + Categoria + " " + bearing + " " + pos + "]";
+	return "[" + category + " " + bearing + " " + pos + "]";
     }
 
 }
