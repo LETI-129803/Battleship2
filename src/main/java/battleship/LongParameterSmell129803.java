@@ -1,12 +1,11 @@
 
 package battleship;
 
-// Classe temporária para testar o Quality Gate
 public class LongParameterSmell129803 {
 
-    // Método com 6 parâmetros para provocar o cheiro
+    // Método corrigido com apenas 5 parâmetros
     public int calcularSoma(int a, int b, int c,
-                            int d, int e, int f) {
-        return a + b + c + d + e + f;
+                            int d, int e) {
+        return a + b + c + d + e;
     }
 }
