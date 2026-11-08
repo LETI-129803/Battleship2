@@ -20,4 +20,4 @@ jobs:
       - name: Qodana Scan
         uses: JetBrains/qodana-action@v2026.2
         with:
-          upload-result: true
+          upload-result: false
