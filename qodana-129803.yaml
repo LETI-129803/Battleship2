@@ -1,0 +1,22 @@
+
+# 129803 - Iara Sofia de Oliveira
+
+version: "1.0"
+
+linter: qodana-jvm-community
+
+projectJDK: "21"
+
+profile:
+  base:
+    name: empty
+  inspections:
+    - inspection: ParametersPerMethod
+      enabled: true
+      severity: WARNING
+      options:
+        m_limit: 5
+
+failureConditions:
+  severityThresholds:
+    any: 0
