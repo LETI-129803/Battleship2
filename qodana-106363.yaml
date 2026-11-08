@@ -3,4 +3,4 @@ version: "1.0"
 linter: qodana-jvm-community
 
 profile:
-  path: QodanaProfile.xml
+  path: QodanaProfile-106363.xml
