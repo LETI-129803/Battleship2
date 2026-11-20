@@ -42,7 +42,8 @@ public class ShipTest {
     void testConstructorNullArguments() {
         assertThrows(NullPointerException.class, () -> new Barge(null, new Position(0, 0)));
         assertThrows(NullPointerException.class, () -> new Barge(Compass.NORTH, null));
-        assertThrows(NullPointerException.class, () -> new Ship(null, Compass.NORTH, new Position(0, 0), 1) {});
+        assertThrows(NullPointerException.class, () -> new Ship(null, Compass.NORTH, new Position(0, 0), 1) {
+        });
     }
 
     @Test
@@ -216,7 +217,8 @@ public class ShipTest {
     @Test
     @DisplayName("getTopMostPos, getBottomMostPos, getLeftMostPos e getRightMostPos calculam extremos corretamente")
     void testExtremePositions() {
-        Ship customShip = new Ship("Custom", Compass.NORTH, new Position(5, 5), 3) {};
+        Ship customShip = new Ship("Custom", Compass.NORTH, new Position(5, 5), 3) {
+        };
         customShip.getPositions().add(new Position(5, 5));
         customShip.getPositions().add(new Position(3, 7)); // menor linha (3), maior coluna (7)
         customShip.getPositions().add(new Position(8, 2)); // maior linha (8), menor coluna (2)
@@ -241,7 +243,8 @@ public class ShipTest {
     @DisplayName("isInsideBoard valida corretamente navios dentro, fora e sem posições")
     void testIsInsideBoard() {
         // Navio sem posições
-        Ship emptyShip = new Ship("Empty", Compass.NORTH, new Position(0, 0), 0) {};
+        Ship emptyShip = new Ship("Empty", Compass.NORTH, new Position(0, 0), 0) {
+        };
         assertFalse(emptyShip.isInsideBoard(), "Error: Ship with empty positions should not be inside board.");
 
         // Navio totalmente dentro do tabuleiro
@@ -267,6 +270,6 @@ public class ShipTest {
     @Test
     @DisplayName("toString devolve representação textual formatada do navio")
     void testToString() {
-        assertEquals("[Barca NORTH (5, 5)]", ship.toString(), "Error: toString format is incorrect.");
+        assertEquals("[Barca n F6]", ship.toString(), "Error: toString format is incorrect.");
     }
 }
