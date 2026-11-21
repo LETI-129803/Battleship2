@@ -15,6 +15,11 @@ import java.util.*;
  */
 public class Move implements IMove {
 
+	public static final String KEY_VALID_SHOTS = "validShots";
+	public static final String KEY_OUTSIDE_SHOTS = "outsideShots";
+	public static final String KEY_REPEATED_SHOTS = "repeatedShots";
+	public static final String KEY_MISSED_SHOTS = "missedShots";
+
 	//-------------------------------------------------------------------
 	private final int number;
 	private final List<IPosition> shots;
@@ -104,10 +109,10 @@ public class Move implements IMove {
 
 		// Criar o mapa para o JSON
 		Map<String, Object> response = new HashMap<>();
-		response.put("validShots", validShots);
-		response.put("outsideShots", outsideShots);
-		response.put("repeatedShots", repeatedShots);
-		response.put("missedShots", missedShots);
+		response.put(KEY_VALID_SHOTS, validShots);
+		response.put(KEY_OUTSIDE_SHOTS, outsideShots);
+		response.put(KEY_REPEATED_SHOTS, repeatedShots);
+		response.put(KEY_MISSED_SHOTS, missedShots);
 
 		// Criar a lista de barcos afundados
 		List<Map<String, Object>> sunkBoats = new ArrayList<>();
