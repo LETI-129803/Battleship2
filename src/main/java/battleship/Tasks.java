@@ -80,23 +80,7 @@ public class Tasks {
 					}
 					break;
 				case SIMULA:
-					if (game != null) {
-						while (game.getRemainingShips() > 0){
-							game.randomEnemyFire();
-							myFleet.printStatus();
-							game.printMyBoard(true, false);
-							try {
-								Thread.sleep(3000);
-							} catch (InterruptedException e) {
-								Thread.currentThread().interrupt(); // Best practice: restore interrupt status
-							}
-						}
-
-						if (game.getRemainingShips() == 0) {
-							game.over();
-							System.exit(0);
-						}
-					}
+					handleSimulation(game, myFleet);
 					break;
 				case TIROS:
 					if (game != null)
@@ -115,6 +99,26 @@ public class Tasks {
 			command = in.next();
 		}
 		System.out.println(GOODBYE_MESSAGE);
+	}
+
+	private static void handleSimulation(IGame game, IFleet myFleet) {
+		if (game != null) {
+			while (game.getRemainingShips() > 0) {
+				game.randomEnemyFire();
+				myFleet.printStatus();
+				game.printMyBoard(true, false);
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					Thread.currentThread().interrupt();
+				}
+			}
+
+			if (game.getRemainingShips() == 0) {
+				game.over();
+				System.exit(0);
+			}
+		}
 	}
 
 	/**
