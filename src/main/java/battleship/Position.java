@@ -123,7 +123,9 @@ public class Position implements IPosition {
 	 */
 	@Override
 	public boolean isAdjacentTo(IPosition other) {
-		return Math.abs(this.row - other.getRow()) <= 1 && Math.abs(this.column - other.getColumn()) <= 1;
+		int deltaRow = Math.abs(this.row - other.getRow());
+		int deltaColumn = Math.abs(this.column - other.getColumn());
+		return deltaRow <= 1 && deltaColumn <= 1;
 	}
 
 	/**
