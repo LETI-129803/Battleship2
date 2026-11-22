@@ -3,6 +3,7 @@ package battleship;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
@@ -17,12 +18,12 @@ public class Game implements IGame
 	 *                    and their positions are shown according to their placement.
 	 * @param moves       the list of moves containing shots. If shot positions are shown,
 	 *                    they will be rendered based on their outcome (hit, miss, etc.).
-	 * @param show_shots  if true, displays the shots taken during the game and marks
+	 * @param showShots  if true, displays the shots taken during the game and marks
 	 *                    their result (hit or miss) on the board.
 	 * @param showLegend  if true, displays an explanatory legend of the symbols used
 	 *                    to represent various elements such as ships, misses, hits, etc.
 	 */
-	public static void printBoard(IFleet fleet, List<IMove> moves, boolean show_shots, boolean showLegend) {
+	public static void printBoard(IFleet fleet, List<IMove> moves, boolean showShots, boolean showLegend) {
 
 		assert fleet != null;
 		assert moves != null;
@@ -35,7 +36,7 @@ public class Game implements IGame
 
 		printShips(fleet, map);
 
-		if (show_shots)
+		if (showShots)
 			printBoardShots(moves, map);
 
 		printBoardFrame(map);
@@ -225,10 +226,7 @@ public class Game implements IGame
 		// Criar uma instância de Random com uma seed baseada no timestamp atual
 		Random random = new Random(System.currentTimeMillis());
 
-		Set<IPosition> usablePositions = new HashSet<IPosition>();
-		for (int r = 0; r < BOARD_SIZE; r++)
-			for (int c = 0; c < BOARD_SIZE; c++)
-				usablePositions.add(new Position(r, c));
+		Set<IPosition> usablePositions = createBoardPositions();
 
 		this.myFleet.getSunkShips().forEach(ship -> usablePositions.removeAll(ship.getAdjacentPositions()));
 		this.alienMoves.forEach(move ->  usablePositions.removeAll(move.getShots()));
@@ -268,6 +266,14 @@ public class Game implements IGame
 		return Game.jsonShots(shots);
 	}
 
+	private static @NotNull Set<IPosition> createBoardPositions() {
+		Set<IPosition> usablePositions = new HashSet<IPosition>();
+		for (int r = 0; r < BOARD_SIZE; r++)
+			for (int c = 0; c < BOARD_SIZE; c++)
+				usablePositions.add(new Position(r, c));
+		return usablePositions;
+	}
+
 
 	/**
 	 * Reads and processes the enemy fire input from the specified scanner.
@@ -286,12 +292,10 @@ public class Game implements IGame
 
 		assert in != null;
 
-		String input = in.nextLine().trim();
-
-		// Criar lista para armazenar os tiros
+        // Criar lista para armazenar os tiros
 		List<IPosition> shots = new ArrayList<>();
 
-		Scanner inputScanner = new Scanner(input);
+		Scanner inputScanner = new Scanner(in.nextLine().trim());
 		while (shots.size() < NUMBER_SHOTS && inputScanner.hasNext()) {
 			// Lê a próxima parte e constrói uma posição
 			String token = inputScanner.next();
@@ -414,7 +418,8 @@ public class Game implements IGame
 			return new ShotResult(false, false, null, false);
 		}
 
-		if (isRepeated || repeatedShot(pos)) {
+		boolean shotAlreadyRepeated = isRepeated || repeatedShot(pos);
+		if (shotAlreadyRepeated) {
 			countRepeatedShots++;
 			return new ShotResult(true, true, null, false);
 		}
