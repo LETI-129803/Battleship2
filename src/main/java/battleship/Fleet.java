@@ -61,7 +61,7 @@ public class Fleet implements IFleet {
 	public boolean addShip(IShip s) {
 		assert s != null;
 
-		if (ships.size() <= FLEET_SIZE && s.isInsideBoard() && !hasCollisionRisk(s)) {
+		if (ships.size() <= FLEET_SIZE && s.isInsideBoard() && !colisionRisk(s)) {
 			ships.add(s);
 			return true;
 		}
@@ -101,7 +101,7 @@ public class Fleet implements IFleet {
 				.orElse(null);
 	}
 
-	private boolean hasCollisionRisk(IShip s) {
+	private boolean colisionRisk(IShip s) {
 		assert s != null;
 
 		return ships.stream().anyMatch(existingShip -> existingShip.tooCloseTo(s));
