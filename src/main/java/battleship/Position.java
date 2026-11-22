@@ -111,7 +111,9 @@ public class Position implements IPosition {
 	 */
 	@Override
 	public boolean isInside() {
-		return row >= 0 && column >= 0 && row < Game.BOARD_SIZE && column < Game.BOARD_SIZE;
+		boolean isRowInside = row >= 0 && row < Game.BOARD_SIZE;
+		boolean isColumnInside = column >= 0 && column < Game.BOARD_SIZE;
+		return isRowInside && isColumnInside;
 	}
 
 	/**
@@ -123,7 +125,9 @@ public class Position implements IPosition {
 	 */
 	@Override
 	public boolean isAdjacentTo(IPosition other) {
-		return Math.abs(this.row - other.getRow()) <= 1 && Math.abs(this.column - other.getColumn()) <= 1;
+		int deltaRow = Math.abs(this.row - other.getRow());
+		int deltaColumn = Math.abs(this.column - other.getColumn());
+		return deltaRow <= 1 && deltaColumn <= 1;
 	}
 
 	/**
