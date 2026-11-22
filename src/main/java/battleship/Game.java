@@ -420,7 +420,8 @@ public class Game implements IGame
 			return new ShotResult(false, false, null, false);
 		}
 
-		if (isRepeated || repeatedShot(pos)) {
+		boolean shotAlreadyRepeated = isRepeated || repeatedShot(pos);
+		if (shotAlreadyRepeated) {
 			countRepeatedShots++;
 			return new ShotResult(true, true, null, false);
 		}
