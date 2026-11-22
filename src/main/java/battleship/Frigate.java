@@ -1,5 +1,7 @@
 package battleship;
 
+import java.util.Objects;
+
 /**
  * The type Frigate represents a ship with a size of 4 units.
  * It is positioned on the game board based on its bearing and initial position.
@@ -10,6 +12,9 @@ package battleship;
  */
 public class Frigate extends Ship {
 
+	private static final String SHIP_NAME = "Fragata";
+	private static final int FRIGATE_SIZE = 4;
+
 	/**
 	 * Instantiates a new Frigate.
 	 *
@@ -17,25 +22,21 @@ public class Frigate extends Ship {
 	 * @param pos     The initial position of the ship on the game board.
 	 */
 	public Frigate(Compass bearing, IPosition pos) {
-		super("Fragata", bearing, pos, 4);
+		super(SHIP_NAME, bearing, pos, FRIGATE_SIZE);
+		Objects.requireNonNull(bearing, "Bearing cannot be null");
 
 		switch (bearing) {
-			case NORTH:
-				for (int r = 0; r < this.getSize(); r++)
+			case NORTH, SOUTH -> {
+				for (int r = 0; r < getSize(); r++) {
 					getPositions().add(new Position(pos.getRow() + r, pos.getColumn()));
-				break;
-			case SOUTH:
-				for (int r = 0; r < this.getSize(); r++)
-					getPositions().add(new Position(pos.getRow() + r, pos.getColumn()));
-				break;
-			case EAST:
-				for (int c = 0; c < this.getSize(); c++)
+				}
+			}
+			case EAST, WEST -> {
+				for (int c = 0; c < getSize(); c++) {
 					getPositions().add(new Position(pos.getRow(), pos.getColumn() + c));
-				break;
-			case WEST:
-				for (int c = 0; c < this.getSize(); c++)
-					getPositions().add(new Position(pos.getRow(), pos.getColumn() + c));
-				break;
+				}
+			}
+			default -> throw new IllegalArgumentException("Invalid bearing for Frigate: " + bearing);
 		}
 	}
 }
