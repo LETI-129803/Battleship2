@@ -1,0 +1,161 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BoardRenderer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">battleship</a>
+</div>
+
+<h1>Coverage Summary for Class: BoardRenderer (battleship)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BoardRenderer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package battleship;
+&nbsp;
+&nbsp;import de.vandermeer.asciitable.AsciiTable;
+&nbsp;import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
+&nbsp;
+&nbsp;/**
+&nbsp; * Utilitário para renderização visual do tabuleiro com tabelas ASCII.
+&nbsp; */
+<b class="nc">&nbsp;public class BoardRenderer {</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Renderiza o tabuleiro com as dimensões e moldura gráfica formatada.
+&nbsp;     *
+&nbsp;     * @param map Matriz de carateres 10x10 representativa do tabuleiro.
+&nbsp;     * @return String formatada contendo a tabela ASCII.
+&nbsp;     */
+&nbsp;    public static String renderBoard(char[][] map) {
+<b class="nc">&nbsp;        AsciiTable at = new AsciiTable();</b>
+<b class="nc">&nbsp;        at.addRule();</b>
+&nbsp;
+&nbsp;        // Cabeçalho das colunas (1 a 10)
+<b class="nc">&nbsp;        at.addRow(&quot;&quot;, &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;, &quot;7&quot;, &quot;8&quot;, &quot;9&quot;, &quot;10&quot;);</b>
+<b class="nc">&nbsp;        at.addRule();</b>
+&nbsp;
+&nbsp;        // Linhas de A a J
+<b class="nc">&nbsp;        for (int row = 0; row &lt; Game.BOARD_SIZE; row++) {</b>
+<b class="nc">&nbsp;            Position pos = new Position(row, 0);</b>
+<b class="nc">&nbsp;            char rowLabel = pos.getClassicRow();</b>
+&nbsp;
+<b class="nc">&nbsp;            String[] rowData = new String[Game.BOARD_SIZE + 1];</b>
+<b class="nc">&nbsp;            rowData[0] = String.valueOf(rowLabel);</b>
+&nbsp;
+<b class="nc">&nbsp;            for (int col = 0; col &lt; Game.BOARD_SIZE; col++) {</b>
+<b class="nc">&nbsp;                char symbol = (map != null &amp;&amp; row &lt; map.length &amp;&amp; col &lt; map[row].length) ? map[row][col] : &#39; &#39;;</b>
+<b class="nc">&nbsp;                rowData[col + 1] = String.valueOf(symbol);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            at.addRow((Object[]) rowData);</b>
+<b class="nc">&nbsp;            at.addRule();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        at.setTextAlignment(TextAlignment.CENTER);</b>
+<b class="nc">&nbsp;        return at.render();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2026-11-20 19:46</div>
+</div>
+</body>
+</html>
