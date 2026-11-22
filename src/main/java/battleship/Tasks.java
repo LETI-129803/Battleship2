@@ -80,23 +80,7 @@ public class Tasks {
 					}
 					break;
 				case SIMULA:
-					if (game != null) {
-						while (game.getRemainingShips() > 0){
-							game.randomEnemyFire();
-							myFleet.printStatus();
-							game.printMyBoard(true, false);
-							try {
-								Thread.sleep(3000);
-							} catch (InterruptedException e) {
-								Thread.currentThread().interrupt(); // Best practice: restore interrupt status
-							}
-						}
-
-						if (game.getRemainingShips() == 0) {
-							game.over();
-							System.exit(0);
-						}
-					}
+					handleSimulation(game, myFleet);
 					break;
 				case TIROS:
 					if (game != null)
@@ -115,6 +99,26 @@ public class Tasks {
 			command = in.next();
 		}
 		System.out.println(GOODBYE_MESSAGE);
+	}
+
+	private static void handleSimulation(IGame game, IFleet myFleet) {
+		if (game != null) {
+			while (game.getRemainingShips() > 0) {
+				game.randomEnemyFire();
+				myFleet.printStatus();
+				game.printMyBoard(true, false);
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					Thread.currentThread().interrupt();
+				}
+			}
+
+			if (game.getRemainingShips() == 0) {
+				game.over();
+				System.exit(0);
+			}
+		}
 	}
 
 	/**
@@ -219,11 +223,14 @@ public class Tasks {
 		input = input.toUpperCase();
 
 		// Verificar os dois formatos possíveis: compactos e com espaço
-		if (input.matches("[A-Z]\\d+")) {
+		boolean matchesCompact = input.matches("[A-Z]\\d+");
+		boolean matchesSeparated = part2 != null && part1.matches("[A-Z]") && part2.matches("\\d+");
+
+		if (matchesCompact) {
 			char column = input.charAt(0); // Extrair a coluna
 			int row = Integer.parseInt(input.substring(1)); // Extrair a linha
 			return new Position(column, row);
-		} else if (part2 != null && part1.matches("[A-Z]") && part2.matches("\\d+")) {
+		} else if (matchesSeparated) {
 			char column = part1.charAt(0); // Extrair a coluna
 			int row = Integer.parseInt(part2); // Extrair a linha
 			return new Position(column, row);

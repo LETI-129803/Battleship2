@@ -25,13 +25,10 @@ public class GameHistory {
 
         if (file.exists()) {
             try {
-                List<Map<String, Object>> savedHistory =
-                        mapper.readValue(
-                                file,
-                                new TypeReference<List<Map<String, Object>>>() {}
-                        );
-
-                history.addAll(savedHistory);
+                history.addAll(mapper.readValue(
+                        file,
+                        new TypeReference<List<Map<String, Object>>>() {}
+                ));
 
             } catch (IOException e) {
                 throw new RuntimeException(
