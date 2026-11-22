@@ -1,6 +1,7 @@
 version: "1.0"
 
 linter: qodana-jvm-community
+projectJDK: "21"
 
 profile:
   path: QodanaProfile-106363.xml
