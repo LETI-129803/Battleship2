@@ -13,6 +13,9 @@
 | `battleship.Ship::buildShip` | Switch Statement / Overly Complex | Replace Conditional with Polymorphism | 129788 |
 | `battleship.Fleet::addShip` | Long Method | Extract Method | 129788 |
 | `battleship.Frigate::Frigate` | Redundant assignment | Inline Variable | 129788 |
-| `battleship.Game::readEnemyFire` | Long Parameter List | Introduce Parameter Object | 129803 |
 | `battleship.Game::randomEnemyFire` | Duplicated Code | Extract Method | 129803 |
-| `battleship.Game::printMyBoard` | Long Method | Extract Method | 129803 |
+| `battleship.Game::fireSingleShot` | Complex Condition | Introduce Variable | 129803 |
+| `battleship.Game::readEnemyFire` | Redundant Temporary Variable | Inline Variable | 129803 |
+| `battleship.Game::printBoard` | Inconsistent Naming | Rename | 129803 |
+| `battleship.Tasks::menu` | Magic Number | Extract Constant | 129803 |
+
