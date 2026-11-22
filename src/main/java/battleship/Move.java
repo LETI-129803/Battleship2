@@ -15,6 +15,8 @@ import java.util.*;
  */
 public class Move implements IMove {
 
+	public record ShotCounts(int validShots, int repeatedShots, int missedShots, int outsideShots) {}
+
 	public static final String KEY_VALID_SHOTS = "validShots";
 	public static final String KEY_OUTSIDE_SHOTS = "outsideShots";
 	public static final String KEY_REPEATED_SHOTS = "repeatedShots";
@@ -104,7 +106,8 @@ public class Move implements IMove {
 		int outsideShots = Game.NUMBER_SHOTS - validShots - repeatedShots;
 
 		if (verbose) {
-			printVerboseSummary(validShots, repeatedShots, missedShots, outsideShots, sunkBoatsCount, hitsPerBoat);
+			ShotCounts counts = new ShotCounts(validShots, repeatedShots, missedShots, outsideShots);
+			printVerboseSummary(counts, sunkBoatsCount, hitsPerBoat);
 		}
 
 		// Criar o mapa para o JSON
@@ -156,15 +159,15 @@ public class Move implements IMove {
 		return jsonString;
 	}
 
-	private void printVerboseSummary(int validShots, int repeatedShots, int missedShots, int outsideShots,
-									 Map<String, Integer> sunkBoatsCount, Map<String, Integer> hitsPerBoat) {
+	private void printVerboseSummary(ShotCounts counts, Map<String, Integer> sunkBoatsCount,
+									 Map<String, Integer> hitsPerBoat) {
 		StringBuilder output = new StringBuilder();
 
-		if (validShots == 0 && repeatedShots > 0) {
-			output.append(repeatedShots).append(" tiro").append(repeatedShots > 1 ? "s" : "").append(" repetido").append(repeatedShots > 1 ? "s" : "");
+		if (counts.validShots() == 0 && counts.repeatedShots() > 0) {
+			output.append(counts.repeatedShots()).append(" tiro").append(counts.repeatedShots() > 1 ? "s" : "").append(" repetido").append(counts.repeatedShots() > 1 ? "s" : "");
 		} else {
-			if (validShots > 0) {
-				output.append(validShots).append(" tiro").append(validShots > 1 ? "s" : "").append(" válido").append(validShots > 1 ? "s" : "").append(": ");
+			if (counts.validShots() > 0) {
+				output.append(counts.validShots()).append(" tiro").append(counts.validShots() > 1 ? "s" : "").append(" válido").append(counts.validShots() > 1 ? "s" : "").append(": ");
 			}
 
 			if (!sunkBoatsCount.isEmpty()) {
@@ -185,25 +188,25 @@ public class Move implements IMove {
 				}
 			}
 
-			if (missedShots > 0) {
-				output.append(missedShots).append(" tiro").append(missedShots > 1 ? "s" : "").append(" na água");
+			if (counts.missedShots() > 0) {
+				output.append(counts.missedShots()).append(" tiro").append(counts.missedShots() > 1 ? "s" : "").append(" na água");
 			} else if (!sunkBoatsCount.isEmpty() || !hitsPerBoat.isEmpty()) {
 				output.setLength(output.length() - 2);
 			}
 
-			if (repeatedShots > 0) {
-				if (validShots > 0) {
+			if (counts.repeatedShots() > 0) {
+				if (counts.validShots() > 0) {
 					output.append(", ");
 				}
-				output.append(repeatedShots).append(" tiro").append(repeatedShots > 1 ? "s" : "").append(" repetido").append(repeatedShots > 1 ? "s" : "");
+				output.append(counts.repeatedShots()).append(" tiro").append(counts.repeatedShots() > 1 ? "s" : "").append(" repetido").append(counts.repeatedShots() > 1 ? "s" : "");
 			}
 		}
 
-		if (outsideShots > 0) {
+		if (counts.outsideShots() > 0) {
 			if (!output.isEmpty()) {
 				output.append(", ");
 			}
-			output.append(outsideShots).append(" tiro").append(outsideShots > 1 ? "s" : "").append(" exterior").append(outsideShots > 1 ? "es" : "");
+			output.append(counts.outsideShots()).append(" tiro").append(counts.outsideShots() > 1 ? "s" : "").append(" exterior").append(counts.outsideShots() > 1 ? "es" : "");
 		}
 
 		System.out.println("Jogada nº" + this.number + " -> " + output);

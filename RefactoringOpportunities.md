@@ -3,6 +3,7 @@
 | Local (classe ou classe::método) | Nome do cheiro no código | Nome da refabricação (IntelliJ) | Número d@ alun@ |
 | :--- | :--- | :--- | :--- |
 | `battleship.Move::processEnemyFire` | Long Method | Extract Method | 106363 |
+| `battleship.Move::printVerboseSummary` | Long Parameter List | Introduce Parameter Object | 106363 |
 | `battleship.Position::isInside` | Complex Condition | Decompose Conditional | 106363 |
 | `battleship.Position::isAdjacentTo` | Complex Expression | Introduce Variable | 106363 |
 | `battleship.Tasks::readClassicPosition` | Complex boolean logic | Introduce Variable | 106363 |
