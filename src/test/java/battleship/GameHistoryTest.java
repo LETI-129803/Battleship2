@@ -3,11 +3,14 @@ package battleship;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import java.io.File;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -63,4 +66,85 @@ public class GameHistoryTest {
 		emptyHistory.getHistory().clear();
 		assertDoesNotThrow(() -> emptyHistory.printHistory());
 	}
+
+	@Test
+	@DisplayName("Verificar historico vazio")
+	void testHistoricoVazio() {
+
+		GameHistory historico = new GameHistory();
+
+		// Limpar apenas a lista em memoria
+		historico.getHistory().clear();
+
+		assertTrue(historico.getHistory().isEmpty());
+		assertEquals(1, historico.getNextMoveNumber());
+
+		PrintStream original = System.out;
+		ByteArrayOutputStream saida = new ByteArrayOutputStream();
+
+		try {
+			System.setOut(new PrintStream(saida));
+
+			historico.printHistory();
+
+		} finally {
+			System.setOut(original);
+		}
+
+		assertTrue(saida.toString().contains(
+				"Ainda não existem jogadas registadas."
+		));
+	}
+
+	@Test
+	@DisplayName("Verificar historico com jogadas e navios")
+	void testHistoricoComJogadas() {
+
+		GameHistory historico = new GameHistory();
+		historico.getHistory().clear();
+
+		historico.getHistory().add(Map.of(
+				"moveNumber", 2,
+				"shots", List.of(Map.of(
+						"row", "A",
+						"column", 1,
+						"result", "MISS"
+				))
+		));
+
+		historico.getHistory().add(Map.of(
+				"moveNumber", 7,
+				"shots", List.of(Map.of(
+						"row", "B",
+						"column", 3,
+						"result", "HIT",
+						"shipType", "Fragata"
+				))
+		));
+
+		assertEquals(2, historico.getHistory().size());
+		assertEquals(8, historico.getNextMoveNumber());
+
+		PrintStream original = System.out;
+		ByteArrayOutputStream saida = new ByteArrayOutputStream();
+
+		try {
+			System.setOut(new PrintStream(saida));
+
+			historico.printHistory();
+
+		} finally {
+			System.setOut(original);
+		}
+
+		String resultado = saida.toString();
+
+		assertTrue(resultado.contains("HISTÓRICO DE JOGADAS"));
+		assertTrue(resultado.contains("Jogada nº 2"));
+		assertTrue(resultado.contains("Jogada nº 7"));
+		assertTrue(resultado.contains("Tiro: A1 - MISS"));
+		assertTrue(resultado.contains("Tiro: B3 - HIT (Fragata)"));
+	}
+
+
 }
