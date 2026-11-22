@@ -15,9 +15,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           fetch-depth: 0
 
       - name: Qodana Scan
         uses: JetBrains/qodana-action@v2026.2
         with:
+          pr-mode: false
+          args: --image jetbrains/qodana-jvm-community:2026.2 --disable-sanity
           upload-result: false

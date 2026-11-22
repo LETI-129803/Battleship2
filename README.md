@@ -121,14 +121,29 @@ graph TD
 
 ---
 
-## 🧪 Testing
-We use high-coverage unit testing to ensure game stability. Run tests using:
+## 🧪 Testing & CI Automation
+
+We use high-coverage unit testing with **JUnit 5** to ensure game stability and prevent side effects during refactorings.
+
+### Local Execution
+To execute all unit tests locally using Maven:
 ```bash
 mvn test
 ```
 
 > [!TIP]
-> Use the `-Dtest=ClassName` flag to run specific test suites during development.
+> Use the `-Dtest=ClassName` flag to run specific test suites during development (e.g., `mvn test -Dtest=PositionTest`).
+
+### 🤖 Continuous Integration (GitHub Actions)
+The project includes an automated CI workflow (`.github/workflows/maven.yml` - **Java CI with Maven**) that automatically validates code quality and runs all unit tests:
+- **Triggers**: Executed on every `push` to any branch (`**`) and on every `pull_request` targeting `main`.
+- **Environment**: Runs on `ubuntu-latest` with Eclipse Temurin JDK 21 and Maven cache enabled.
+- **Pipeline Steps**:
+  1. Checks out the code (`actions/checkout@v4`).
+  2. Sets up JDK 21 (`actions/setup-java@v4`).
+  3. Compiles the project (`mvn -B compile`).
+  4. Runs the entire JUnit unit test suite (`mvn -B test`).
+- **Objective**: Guarantee that all unit tests pass before merging any branch or pull request, giving the development team immediate feedback on regressions or unintended side effects.
 
 ---
 
