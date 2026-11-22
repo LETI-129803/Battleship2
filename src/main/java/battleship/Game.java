@@ -292,12 +292,10 @@ public class Game implements IGame
 
 		assert in != null;
 
-		String input = in.nextLine().trim();
-
-		// Criar lista para armazenar os tiros
+        // Criar lista para armazenar os tiros
 		List<IPosition> shots = new ArrayList<>();
 
-		Scanner inputScanner = new Scanner(input);
+		Scanner inputScanner = new Scanner(in.nextLine().trim());
 		while (shots.size() < NUMBER_SHOTS && inputScanner.hasNext()) {
 			// Lê a próxima parte e constrói uma posição
 			String token = inputScanner.next();
