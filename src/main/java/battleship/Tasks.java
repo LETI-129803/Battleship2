@@ -33,6 +33,7 @@ public class Tasks {
 	private static final String STATUS = "estado";
 	private static final String SIMULA = "simula";
 	private static final String HISTORICO = "historico";
+	public static final int SIMULATION_DELAY_MS = 3000;
 
 	/**
 	 * This task also tests the fighting element of a round of three shots
@@ -108,7 +109,7 @@ public class Tasks {
 				myFleet.printStatus();
 				game.printMyBoard(true, false);
 				try {
-					Thread.sleep(3000);
+					Thread.sleep(SIMULATION_DELAY_MS);
 				} catch (InterruptedException e) {
 					Thread.currentThread().interrupt();
 				}
